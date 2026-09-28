@@ -1,0 +1,3070 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ONE | طازج كل يوم</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=El+Messiri:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --green-dark:#173f2d;
+    --green:#285b42;
+    --green-2:#367456;
+    --green-light:#e9f0e7;
+    --orange:#ef8a35;
+    --orange-light:#fff0df;
+    --cream:#fbf7ef;
+    --cream-2:#f4ecdf;
+    --white:#fff;
+    --text:#23332b;
+    --muted:#788079;
+    --shadow:0 18px 50px rgba(23,63,45,.12);
+    --radius:28px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Cairo",sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+body.dark{
+    --cream:#101a15;
+    --cream-2:#18251e;
+    --white:#17231c;
+    --text:#f2f6f2;
+    --muted:#aab8ae;
+    --green-light:#1d3026;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* ================= LOADER ================= */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:var(--green-dark);
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.7s ease;
+}
+
+.loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-logo{
+    color:white;
+    font-size:55px;
+    font-weight:900;
+    letter-spacing:8px;
+    animation:loaderPulse 1.2s infinite alternate;
+}
+
+@keyframes loaderPulse{
+    from{transform:scale(.85);opacity:.5}
+    to{transform:scale(1.05);opacity:1}
+}
+
+/* ================= PROGRESS ================= */
+
+.progress{
+    position:fixed;
+    top:0;
+    right:0;
+    height:4px;
+    width:0;
+    background:var(--orange);
+    z-index:10001;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    z-index:5000;
+    padding:18px 6%;
+    transition:.4s;
+}
+
+header.scrolled{
+    padding:11px 6%;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(18px);
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+body.dark header.scrolled{
+    background:rgba(16,26,21,.9);
+}
+
+.nav{
+    max-width:1350px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:900;
+    color:var(--green-dark);
+    letter-spacing:5px;
+}
+
+body.dark .logo{
+    color:white;
+}
+
+.nav-links{
+    display:flex;
+    gap:35px;
+    align-items:center;
+}
+
+.nav-links a{
+    font-weight:700;
+    position:relative;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    bottom:-7px;
+    right:0;
+    width:0;
+    height:3px;
+    background:var(--orange);
+    border-radius:20px;
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--white);
+    color:var(--green-dark);
+    display:grid;
+    place-items:center;
+    font-size:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    position:relative;
+}
+
+.icon-btn:hover{
+    transform:translateY(-4px) rotate(5deg);
+}
+
+.cart-count{
+    position:absolute;
+    top:-5px;
+    left:-4px;
+    width:21px;
+    height:21px;
+    border-radius:50%;
+    background:var(--orange);
+    color:white;
+    font-size:11px;
+    display:grid;
+    place-items:center;
+    font-weight:900;
+}
+
+.mobile-menu{
+    display:none;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    padding:150px 6% 80px;
+    display:flex;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 10% 20%,rgba(239,138,53,.16),transparent 28%),
+        radial-gradient(circle at 90% 80%,rgba(40,91,66,.15),transparent 30%);
+}
+
+.hero-container{
+    width:100%;
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:70px;
+}
+
+.hero-text{
+    animation:heroText 1s ease both;
+}
+
+@keyframes heroText{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--orange-light);
+    color:var(--orange);
+    padding:10px 18px;
+    border-radius:50px;
+    font-weight:800;
+    margin-bottom:22px;
+}
+
+.hero h1{
+    font-family:"El Messiri",sans-serif;
+    font-size:clamp(45px,6vw,82px);
+    line-height:1.15;
+    color:var(--green-dark);
+    margin-bottom:20px;
+}
+
+body.dark .hero h1{
+    color:white;
+}
+
+.hero h1 span{
+    color:var(--orange);
+}
+
+.hero p{
+    max-width:600px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:2;
+    margin-bottom:32px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:15px 25px;
+    border-radius:50px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.btn-green{
+    background:var(--green-dark);
+    color:white;
+}
+
+.btn-orange{
+    background:var(--orange);
+    color:white;
+}
+
+.btn-outline{
+    background:transparent;
+    border:2px solid var(--green);
+    color:var(--green);
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 30px rgba(0,0,0,.14);
+}
+
+.hero-image-wrap{
+    position:relative;
+    animation:heroImage 1.2s ease both;
+}
+
+@keyframes heroImage{
+    from{
+        opacity:0;
+        transform:translateX(-60px) rotate(-5deg);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.hero-image{
+    width:100%;
+    height:600px;
+    object-fit:cover;
+    border-radius:45% 45% 35px 35px;
+    box-shadow:var(--shadow);
+}
+
+.hero-note{
+    position:absolute;
+    bottom:35px;
+    right:-30px;
+    background:var(--white);
+    padding:18px 24px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    font-weight:800;
+    animation:float 3s ease-in-out infinite;
+}
+
+.hero-note span{
+    color:var(--orange);
+}
+
+@keyframes float{
+    50%{transform:translateY(-12px)}
+}
+
+/* ================= FLOATING FRUITS ================= */
+
+.floating-fruit{
+    position:absolute;
+    font-size:30px;
+    opacity:.5;
+    pointer-events:none;
+    animation:fall 8s linear infinite;
+}
+
+.f1{left:8%;top:-50px;animation-delay:0s}
+.f2{left:25%;top:-80px;animation-delay:2s}
+.f3{left:55%;top:-70px;animation-delay:4s}
+.f4{left:80%;top:-90px;animation-delay:1s}
+.f5{left:92%;top:-50px;animation-delay:3s}
+
+@keyframes fall{
+    from{transform:translateY(-100px) rotate(0)}
+    to{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ================= MARQUEE ================= */
+
+.marquee{
+    overflow:hidden;
+    background:var(--green-dark);
+    color:white;
+    padding:17px 0;
+}
+
+.marquee-track{
+    width:max-content;
+    display:flex;
+    gap:50px;
+    animation:marquee 25s linear infinite;
+}
+
+.marquee span{
+    font-weight:800;
+    font-size:18px;
+}
+
+@keyframes marquee{
+    to{transform:translateX(50%)}
+}
+
+/* ================= GENERAL ================= */
+
+section{
+    padding:100px 6%;
+}
+
+.section-head{
+    max-width:1350px;
+    margin:0 auto 45px;
+    text-align:center;
+}
+
+.section-label{
+    color:var(--orange);
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.section-head h2{
+    font-family:"El Messiri",sans-serif;
+    color:var(--green-dark);
+    font-size:45px;
+}
+
+body.dark .section-head h2{
+    color:white;
+}
+
+.section-head p{
+    color:var(--muted);
+    max-width:650px;
+    margin:10px auto 0;
+    line-height:1.9;
+}
+
+/* ================= FILTER ================= */
+
+.filters{
+    max-width:1350px;
+    margin:0 auto 40px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.filter{
+    padding:12px 22px;
+    border-radius:50px;
+    background:var(--white);
+    color:var(--text);
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.filter.active,
+.filter:hover{
+    background:var(--green-dark);
+    color:white;
+    transform:translateY(-3px);
+}
+
+.search-box{
+    max-width:500px;
+    margin:0 auto 30px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:16px 50px 16px 20px;
+    border:2px solid transparent;
+    outline:none;
+    border-radius:50px;
+    background:var(--white);
+    color:var(--text);
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.search-box input:focus{
+    border-color:var(--orange);
+}
+
+.search-box span{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* ================= PRODUCTS ================= */
+
+.products-grid{
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.product-card{
+    background:var(--white);
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,.06);
+    transition:.45s;
+    position:relative;
+    transform-style:preserve-3d;
+}
+
+.product-card:hover{
+    transform:translateY(-12px) rotateX(2deg) rotateY(-2deg);
+    box-shadow:0 25px 50px rgba(23,63,45,.16);
+}
+
+.product-image{
+    height:245px;
+    position:relative;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.product-card:hover .product-image img{
+    transform:scale(1.1);
+}
+
+.product-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:var(--orange);
+    color:white;
+    padding:7px 13px;
+    border-radius:50px;
+    font-size:12px;
+    font-weight:900;
+}
+
+.favorite{
+    position:absolute;
+    top:15px;
+    left:15px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,.92);
+    display:grid;
+    place-items:center;
+    font-size:20px;
+    transition:.3s;
+}
+
+.favorite.active{
+    color:#ef4d5c;
+    transform:scale(1.15);
+}
+
+.product-content{
+    padding:20px;
+}
+
+.product-content small{
+    color:var(--orange);
+    font-weight:800;
+}
+
+.product-content h3{
+    margin:5px 0;
+    font-size:21px;
+}
+
+.product-content p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+    min-height:48px;
+}
+
+.product-actions{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.product-actions button{
+    flex:1;
+    padding:12px 8px;
+    border-radius:15px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.add-btn{
+    background:var(--green-dark);
+    color:white;
+}
+
+.view-btn{
+    background:var(--green-light);
+    color:var(--green-dark);
+}
+
+.product-actions button:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+    background:var(--green-light);
+}
+
+.about-grid{
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-image{
+    height:550px;
+    border-radius:40px;
+    object-fit:cover;
+    box-shadow:var(--shadow);
+}
+
+.about-text h2{
+    font-family:"El Messiri",sans-serif;
+    font-size:45px;
+    color:var(--green-dark);
+    margin-bottom:20px;
+}
+
+body.dark .about-text h2{
+    color:white;
+}
+
+.about-text p{
+    color:var(--muted);
+    line-height:2;
+    margin-bottom:25px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:var(--white);
+    padding:20px;
+    border-radius:22px;
+    text-align:center;
+}
+
+.stat strong{
+    display:block;
+    color:var(--orange);
+    font-size:30px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* ================= GALLERY ================= */
+
+.gallery-grid{
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    grid-auto-rows:240px;
+    gap:15px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:25px;
+}
+
+.gallery-item:first-child{
+    grid-row:span 2;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.1) rotate(2deg);
+}
+
+/* ================= BANNER ================= */
+
+.fresh-banner{
+    max-width:1350px;
+    margin:auto;
+    min-height:400px;
+    border-radius:45px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:60px;
+    background:
+        linear-gradient(90deg,rgba(23,63,45,.94),rgba(23,63,45,.45)),
+        url("https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+}
+
+.fresh-banner h2{
+    color:white;
+    font-family:"El Messiri",sans-serif;
+    font-size:50px;
+    max-width:650px;
+}
+
+.fresh-banner p{
+    color:#e5eee8;
+    max-width:600px;
+    line-height:2;
+    margin:15px 0 25px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+    background:var(--cream-2);
+}
+
+.contact-grid{
+    max-width:1000px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.contact-card{
+    background:var(--white);
+    padding:35px 20px;
+    border-radius:28px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-8px);
+}
+
+.contact-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:var(--orange-light);
+    font-size:27px;
+}
+
+.contact-card h3{
+    margin-bottom:8px;
+}
+
+.contact-card p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:var(--green-dark);
+    color:white;
+    padding:60px 6% 25px;
+}
+
+.footer-grid{
+    max-width:1350px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:50px;
+}
+
+.footer-logo{
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:7px;
+}
+
+footer p{
+    color:#b9c9be;
+    line-height:2;
+    margin-top:12px;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+.footer-links{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    color:#c5d2ca;
+}
+
+.footer-bottom{
+    max-width:1350px;
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.15);
+    text-align:center;
+    color:#aebdb4;
+}
+
+/* ================= WHATSAPP ================= */
+
+.whatsapp{
+    position:fixed;
+    bottom:25px;
+    left:25px;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:#25d366;
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:30px;
+    z-index:4000;
+    box-shadow:0 12px 30px rgba(37,211,102,.4);
+    animation:whatsappPulse 2s infinite;
+}
+
+@keyframes whatsappPulse{
+    0%,100%{box-shadow:0 12px 30px rgba(37,211,102,.4)}
+    50%{box-shadow:0 12px 45px rgba(37,211,102,.7)}
+}
+
+/* ================= CART ================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:7000;
+    opacity:0;
+    visibility:hidden;
+    transition:.4s;
+}
+
+.overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.cart-drawer{
+    position:fixed;
+    top:0;
+    left:0;
+    width:min(430px,92%);
+    height:100vh;
+    background:var(--white);
+    z-index:8000;
+    transform:translateX(-100%);
+    transition:.5s cubic-bezier(.77,0,.18,1);
+    display:flex;
+    flex-direction:column;
+}
+
+.cart-drawer.show{
+    transform:translateX(0);
+}
+
+.cart-head{
+    padding:25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--cream-2);
+}
+
+.cart-head h2{
+    font-family:"El Messiri",sans-serif;
+}
+
+.close-cart{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--green-light);
+    font-size:20px;
+}
+
+.cart-body{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+}
+
+.empty-cart{
+    height:100%;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    color:var(--muted);
+}
+
+.empty-cart div{
+    font-size:65px;
+    margin-bottom:15px;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:var(--cream);
+    padding:12px;
+    border-radius:20px;
+    margin-bottom:12px;
+}
+
+.cart-item img{
+    width:70px;
+    height:70px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.cart-item-info small{
+    color:var(--muted);
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:8px;
+}
+
+.qty button{
+    width:27px;
+    height:27px;
+    border-radius:8px;
+    background:var(--green-light);
+    color:var(--green-dark);
+    font-weight:900;
+}
+
+.remove-item{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#ffe7e7;
+    color:#d54b4b;
+    font-size:18px;
+}
+
+.cart-footer{
+    padding:20px;
+    border-top:1px solid var(--cream-2);
+}
+
+.cart-footer .btn{
+    width:100%;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:9000;
+    display:grid;
+    place-items:center;
+    padding:20px;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+}
+
+.modal.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.modal-box{
+    background:var(--white);
+    width:min(850px,100%);
+    border-radius:30px;
+    overflow:hidden;
+    transform:scale(.8);
+    transition:.4s;
+    position:relative;
+}
+
+.modal.show .modal-box{
+    transform:scale(1);
+}
+
+.modal-close{
+    position:absolute;
+    top:15px;
+    left:15px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:white;
+    z-index:2;
+    font-size:20px;
+}
+
+.modal-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+.modal-grid img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+}
+
+.modal-info{
+    padding:45px 35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.modal-info small{
+    color:var(--orange);
+    font-weight:900;
+}
+
+.modal-info h2{
+    font-family:"El Messiri",sans-serif;
+    font-size:38px;
+    margin:10px 0;
+}
+
+.modal-info p{
+    color:var(--muted);
+    line-height:2;
+    margin-bottom:25px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    right:50%;
+    transform:translate(50%,120px);
+    background:var(--green-dark);
+    color:white;
+    padding:15px 25px;
+    border-radius:50px;
+    z-index:10000;
+    box-shadow:var(--shadow);
+    transition:.4s;
+    opacity:0;
+}
+
+.toast.show{
+    transform:translate(50%,0);
+    opacity:1;
+}
+
+/* ================= REVEAL ================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+    .products-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero-container,
+    .about-grid{
+        gap:35px;
+    }
+}
+
+@media(max-width:850px){
+
+    header{
+        padding:15px 5%;
+    }
+
+    .nav-links{
+        position:fixed;
+        top:75px;
+        right:5%;
+        left:5%;
+        background:var(--white);
+        padding:25px;
+        border-radius:25px;
+        flex-direction:column;
+        box-shadow:var(--shadow);
+        transform:translateY(-20px);
+        opacity:0;
+        visibility:hidden;
+        transition:.4s;
+    }
+
+    .nav-links.show{
+        transform:none;
+        opacity:1;
+        visibility:visible;
+    }
+
+    .mobile-menu{
+        display:grid;
+    }
+
+    .hero{
+        padding-top:120px;
+    }
+
+    .hero-container,
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-image{
+        height:430px;
+    }
+
+    .hero-note{
+        right:15px;
+    }
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .gallery-item:first-child{
+        grid-row:auto;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:550px){
+
+    section{
+        padding:75px 5%;
+    }
+
+    .hero{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-buttons .btn{
+        width:100%;
+    }
+
+    .hero-image{
+        height:350px;
+    }
+
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-head h2{
+        font-size:35px;
+    }
+
+    .about-image{
+        height:350px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-grid{
+        grid-template-columns:1fr;
+        grid-auto-rows:220px;
+    }
+
+    .fresh-banner{
+        padding:35px 25px;
+        min-height:450px;
+    }
+
+    .fresh-banner h2{
+        font-size:35px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .modal-grid{
+        grid-template-columns:1fr;
+    }
+
+    .modal-grid img{
+        height:280px;
+    }
+
+    .modal-info{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+    <div class="loader-logo">ONE</div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<!-- FLOATING FRUITS -->
+<div class="floating-fruit f1">🍊</div>
+<div class="floating-fruit f2">🍓</div>
+<div class="floating-fruit f3">🥭</div>
+<div class="floating-fruit f4">🍍</div>
+<div class="floating-fruit f5">🍉</div>
+
+<!-- HEADER -->
+<header id="header">
+    <nav class="nav">
+        <a href="#home" class="logo">ONE</a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">الرئيسية</a>
+            <a href="#products">منتجاتنا</a>
+            <a href="#about">من نحن</a>
+            <a href="#gallery">معرضنا</a>
+            <a href="#contact">تواصل معنا</a>
+        </div>
+
+        <div class="nav-actions">
+
+            <button class="icon-btn" id="themeBtn" title="الوضع الليلي">
+                🌙
+            </button>
+
+            <button class="icon-btn" id="cartBtn" title="السلة">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+
+            <button class="icon-btn mobile-menu" id="menuBtn">
+                ☰
+            </button>
+
+        </div>
+
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+    <div class="hero-container">
+
+        <div class="hero-text">
+
+            <div class="hero-badge">
+                🍃 طازج كل يوم
+            </div>
+
+            <h1>
+                فاكهة <span>طازجة</span><br>
+                يوميًا
+            </h1>
+
+            <p>
+                نختار لك أجود أنواع الفواكه والخضروات والعصائر الطازجة
+                بعناية، ونجهزها لتصلك بنفس الجودة والطزاجة كل يوم.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-orange">
+                    اكتشف منتجاتنا 🍊
+                </a>
+
+                <a href="https://wa.me/201272949858" target="_blank" class="btn btn-green">
+                    اطلب عبر واتساب 💬
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hero-image-wrap">
+
+            <img
+                class="hero-image"
+                src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=2000&q=85"
+                alt="فواكه طازجة"
+                onerror="this.src='https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1600&q=80'"
+            >
+
+            <div class="hero-note">
+                🍓 طازج <span>100%</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+    <div class="marquee-track">
+        <span>🍓 فواكه طازجة</span>
+        <span>🥭 مانجو</span>
+        <span>🥬 خضروات</span>
+        <span>🍹 عصائر طبيعية</span>
+        <span>🍍 طبق فواكه</span>
+        <span>🍊 جودة كل يوم</span>
+        <span>🍉 طعم طبيعي</span>
+        <span>🍓 فواكه طازجة</span>
+        <span>🥭 مانجو</span>
+        <span>🥬 خضروات</span>
+        <span>🍹 عصائر طبيعية</span>
+    </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+
+    <div class="section-head reveal">
+        <div class="section-label">اختار اللي بتحبه</div>
+        <h2>منتجاتنا الطازة</h2>
+        <p>
+            فواكه، خضروات، عصائر طبيعية وأطباق فواكه جاهزة.
+            اختار المنتجات وأضفها للسلة، ثم أرسل طلبك مباشرة على واتساب.
+        </p>
+    </div>
+
+    <div class="search-box reveal">
+        <span>🔎</span>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="ابحث عن مانجو، عصير، خضار..."
+        >
+    </div>
+
+    <div class="filters reveal">
+
+        <button class="filter active" data-filter="all">
+            الكل
+        </button>
+
+        <button class="filter" data-filter="platter">
+            🍇 أطباق الفواكه
+        </button>
+
+        <button class="filter" data-filter="fruit">
+            🍓 الفواكه
+        </button>
+
+        <button class="filter" data-filter="vegetable">
+            🥬 الخضروات
+        </button>
+
+        <button class="filter" data-filter="juice">
+            🍹 العصائر
+        </button>
+
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+
+        <!-- أطباق فواكه -->
+
+        <article class="product-card reveal"
+            data-category="platter"
+            data-name="طبق فواكه مشكل"
+            data-description="تشكيلة متنوعة من أجمل الفواكه الطازجة."
+            data-image="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1000&q=80" alt="طبق فواكه">
+                <span class="product-badge">الأكثر طلبًا</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍇 أطباق فواكه</small>
+                <h3>طبق فواكه مشكل</h3>
+                <p>تشكيلة متنوعة من أجمل الفواكه الطازجة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="platter"
+            data-name="طبق فواكه استوائي"
+            data-description="مانجو وأناناس وكيوي وفراولة وباقي الفواكه الاستوائية."
+            data-image="https://images.unsplash.com/photo-1559181567-c3190ca9959b?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (9).png" alt="طبق فواكه استوائي">
+                <span class="product-badge">طازج</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍍 أطباق فواكه</small>
+                <h3>طبق فواكه استوائي</h3>
+                <p>مانجو وأناناس وكيوي وفراولة وفواكه استوائية.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="platter"
+            data-name="طبق فواكه عائلي"
+            data-description="طبق كبير مناسب للعائلة والمناسبات."
+            data-image="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (10).png" alt="طبق فواكه عائلي">
+                <span class="product-badge">عائلي</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍉 أطباق فواكه</small>
+                <h3>طبق فواكه عائلي</h3>
+                <p>تشكيلة كبيرة مناسبة للعائلة والمناسبات.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- فواكه -->
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="مانجو"
+            data-description="مانجو طازة وحلوة بطعم غني."
+            data-image="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=1000&q=80" alt="مانجو">
+                <span class="product-badge">مانجو</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥭 فواكه</small>
+                <h3>مانجو</h3>
+                <p>مانجو طازة وحلوة بطعم غني.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="فراولة"
+            data-description="فراولة حمراء طازة ومليانة نكهة."
+            data-image="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80" alt="فراولة">
+                <span class="product-badge">طازج</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍓 فواكه</small>
+                <h3>فراولة</h3>
+                <p>فراولة حمراء طازة ومليانة نكهة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="أناناس"
+            data-description="أناناس طازج بطعم استوائي منعش."
+            data-image="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=1000&q=80" alt="أناناس">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍍 فواكه</small>
+                <h3>أناناس</h3>
+                <p>أناناس طازج بطعم استوائي منعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="برتقال"
+            data-description="برتقال طازج غني بالعصارة."
+            data-image="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1000&q=80" alt="برتقال">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍊 فواكه</small>
+                <h3>برتقال</h3>
+                <p>برتقال طازج غني بالعصارة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="موز"
+            data-description="موز طازج مناسب للفطار والعصائر."
+            data-image="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=1000&q=80" alt="موز">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍌 فواكه</small>
+                <h3>موز</h3>
+                <p>موز طازج مناسب للفطار والعصائر.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="تفاح"
+            data-description="تفاح طازج ومقرمش."
+            data-image="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=1000&q=80" alt="تفاح">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍎 فواكه</small>
+                <h3>تفاح</h3>
+                <p>تفاح طازج ومقرمش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="عنب"
+            data-description="عنب طازج وحلو."
+            data-image="https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=1000&q=80" alt="عنب">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍇 فواكه</small>
+                <h3>عنب</h3>
+                <p>عنب طازج وحلو.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="بطيخ"
+            data-description="بطيخ منعش ومليان مياه."
+            data-image="https://images.unsplash.com/photo-1563114773-84221bd62daa?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1563114773-84221bd62daa?auto=format&fit=crop&w=1000&q=80" alt="بطيخ">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍉 فواكه</small>
+                <h3>بطيخ</h3>
+                <p>بطيخ منعش ومليان مياه.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="كيوي"
+            data-description="كيوي طازج بطعم منعش."
+            data-image="https://images.unsplash.com/photo-1585059895524-72359e06133a?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1585059895524-72359e06133a?auto=format&fit=crop&w=1000&q=80" alt="كيوي">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥝 فواكه</small>
+                <h3>كيوي</h3>
+                <p>كيوي طازج بطعم منعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="رمان"
+            data-description="رمان طازج وحباته مليانة عصارة."
+            data-image="https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=1000&q=80" alt="رمان">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>❤️ فواكه</small>
+                <h3>رمان</h3>
+                <p>رمان طازج وحباته مليانة عصارة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="fruit"
+            data-name="ليمون"
+            data-description="ليمون طازج مناسب للعصائر والمشروبات."
+            data-image="https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&w=1000&q=80" alt="ليمون">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍋 فواكه</small>
+                <h3>ليمون</h3>
+                <p>ليمون طازج مناسب للعصائر والمشروبات.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- خضروات -->
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="طماطم"
+            data-description="طماطم حمراء طازجة."
+            data-image="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=1000&q=80" alt="طماطم">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍅 خضروات</small>
+                <h3>طماطم</h3>
+                <p>طماطم حمراء طازجة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="خيار"
+            data-description="خيار أخضر طازج ومقرمش."
+            data-image="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1604977042946-1eecc30f269e?auto=format&fit=crop&w=1000&q=80" alt="خيار">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥒 خضروات</small>
+                <h3>خيار</h3>
+                <p>خيار أخضر طازج ومقرمش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="جزر"
+            data-description="جزر طازج ومقرمش."
+            data-image="https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=1000&q=80" alt="جزر">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥕 خضروات</small>
+                <h3>جزر</h3>
+                <p>جزر طازج ومقرمش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="خس"
+            data-description="خس أخضر طازج للسلطات."
+            data-image="https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?auto=format&fit=crop&w=1000&q=80" alt="خس">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥬 خضروات</small>
+                <h3>خس</h3>
+                <p>خس أخضر طازج للسلطات.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="فلفل ألوان"
+            data-description="فلفل ألوان طازج ومتنوع."
+            data-image="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?auto=format&fit=crop&w=1000&q=80" alt="فلفل ألوان">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🫑 خضروات</small>
+                <h3>فلفل ألوان</h3>
+                <p>فلفل ألوان طازج ومتنوع.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="بطاطس"
+            data-description="بطاطس طازة مناسبة للطبخ."
+            data-image="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=1000&q=80" alt="بطاطس">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥔 خضروات</small>
+                <h3>بطاطس</h3>
+                <p>بطاطس طازة مناسبة للطبخ.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="بصل"
+            data-description="بصل طازج للطبخ."
+            data-image="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (11).png" alt="بصل">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🧅 خضروات</small>
+                <h3>بصل</h3>
+                <p>بصل طازج للطبخ.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="بروكلي"
+            data-description="بروكلي أخضر طازج."
+            data-image="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?auto=format&fit=crop&w=1000&q=80" alt="بروكلي">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥦 خضروات</small>
+                <h3>بروكلي</h3>
+                <p>بروكلي أخضر طازج.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="قرنبيط"
+            data-description="قرنبيط طازج."
+            data-image="https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=1000&q=80" alt="قرنبيط">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥦 خضروات</small>
+                <h3>قرنبيط</h3>
+                <p>قرنبيط طازج.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="vegetable"
+            data-name="سبانخ"
+            data-description="سبانخ خضراء طازة."
+            data-image="https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=1000&q=80" alt="سبانخ">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥬 خضروات</small>
+                <h3>سبانخ</h3>
+                <p>سبانخ خضراء طازة.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <!-- العصائر -->
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير مانجو"
+            data-description="عصير مانجو طبيعي ومنعش."
+            data-image="https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (12).png" alt="عصير مانجو">
+                <span class="product-badge">طبيعي</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🥭 عصائر</small>
+                <h3>عصير مانجو</h3>
+                <p>عصير مانجو طبيعي ومنعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير برتقال"
+            data-description="عصير برتقال طبيعي طازج."
+            data-image="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (13).png" alt="عصير برتقال">
+                <span class="product-badge">طبيعي</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍊 عصائر</small>
+                <h3>عصير برتقال</h3>
+                <p>عصير برتقال طبيعي طازج.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير فراولة"
+            data-description="عصير فراولة طبيعي بطعم غني."
+            data-image="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (14).png" alt="عصير فراولة">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍓 عصائر</small>
+                <h3>عصير فراولة</h3>
+                <p>عصير فراولة طبيعي بطعم غني.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير جوافة"
+            data-description="عصير جوافة كريمي ومنعش."
+            data-image="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (15).png" alt="عصير جوافة">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍐 عصائر</small>
+                <h3>عصير جوافة</h3>
+                <p>عصير جوافة كريمي ومنعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير بطيخ"
+            data-description="عصير بطيخ خفيف ومنعش."
+            data-image="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (16).png" alt="عصير بطيخ">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍉 عصائر</small>
+                <h3>عصير بطيخ</h3>
+                <p>عصير بطيخ خفيف ومنعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="كوكتيل فواكه"
+            data-description="خليط من الفواكه الطازجة في كوب واحد."
+            data-image="https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (17).png" alt="كوكتيل فواكه">
+                <span class="product-badge">مميز</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍹 عصائر</small>
+                <h3>كوكتيل فواكه</h3>
+                <p>خليط من الفواكه الطازجة في كوب واحد.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="ليمون بالنعناع"
+            data-description="ليمون طبيعي مع النعناع المنعش."
+            data-image="https://images.unsplash.com/photo-1523677011781-c91d1bbe2fdb?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (18).png" alt="ليمون بالنعناع">
+                <span class="product-badge">منعش</span>
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍋 عصائر</small>
+                <h3>ليمون بالنعناع</h3>
+                <p>ليمون طبيعي مع النعناع المنعش.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card reveal"
+            data-category="juice"
+            data-name="عصير أناناس"
+            data-description="عصير أناناس استوائي طبيعي."
+            data-image="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=1000&q=80">
+
+            <div class="product-image">
+                <img src="PhotoshopExtension_Image (19).png" alt="عصير أناناس">
+                <button class="favorite">♡</button>
+            </div>
+
+            <div class="product-content">
+                <small>🍍 عصائر</small>
+                <h3>عصير أناناس</h3>
+                <p>عصير أناناس استوائي طبيعي.</p>
+                <div class="product-actions">
+                    <button class="add-btn">أضف للسلة 🛒</button>
+                    <button class="view-btn">عرض 👁</button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+
+    <div class="about-grid">
+
+        <img
+            class="about-image reveal"
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85"
+            alt="فواكه وخضروات طازجة"
+        >
+
+        <div class="about-text reveal">
+
+            <div class="section-label">ليه ONE؟</div>
+
+            <h2>الطزاجة عندنا مش مجرد كلمة</h2>
+
+            <p>
+                في ONE بنختار الفواكه والخضروات بعناية،
+                ونهتم بجودة كل منتج قبل ما يوصل ليك.
+            </p>
+
+            <p>
+                هدفنا إنك تفتح الطلب وتحس إن المنتجات لسه متجمعة
+                من السوق حالًا، بطعمها وشكلها ورائحتها الطبيعية.
+            </p>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <strong data-count="100">0</strong>
+                    <span>% طازج</span>
+                </div>
+
+                <div class="stat">
+                    <strong data-count="25">0</strong>
+                    <span>+ منتج</span>
+                </div>
+
+                <div class="stat">
+                    <strong data-count="7">0</strong>
+                    <span>أيام في الأسبوع</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+
+    <div class="section-head reveal">
+        <div class="section-label">شوف الطزاجة</div>
+        <h2>معرض ONE</h2>
+        <p>مجموعة من الفواكه والخضروات والعصائر الطازجة.</p>
+    </div>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=1200&q=85" alt="فواكه">
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=900&q=80" alt="مانجو">
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=900&q=80" alt="فراولة">
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=900&q=80" alt="خضروات">
+        </div>
+
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=900&q=80" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=900&q=80" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0018.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0017.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0015.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0014.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0013.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0012.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0011.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0009.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0008.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0007.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0006.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0002.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0001.jpg" alt="عصير">
+        </div>
+        <div class="gallery-item reveal">
+            <img src="IMG-20260928-WA0000.jpg" alt="عصير">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FRESH BANNER -->
+<section>
+
+    <div class="fresh-banner reveal">
+
+        <div>
+
+            <h2>
+                كل يوم طعم جديد...
+                والطزاجة دايمًا واحدة 🍃
+            </h2>
+
+            <p>
+                اختار اللي نفسك فيه، ضيفه للسلة،
+                وابعت الطلب مباشرة على واتساب بدون خطوات معقدة.
+            </p>
+
+            <a href="#products" class="btn btn-orange">
+                ابدأ طلبك الآن 🛒
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <div class="section-head reveal">
+        <div class="section-label">اتواصل معانا</div>
+        <h2>ONE دايمًا قريب منك</h2>
+    </div>
+
+    <div class="contact-grid">
+
+        <div class="contact-card reveal">
+            <div class="contact-icon">💬</div>
+            <h3>واتساب</h3>
+            <p>اطلب واستفسر عن المنتجات مباشرة.</p>
+            <br>
+            <a
+                href="https://wa.me/201272949858"
+                target="_blank"
+                class="btn btn-green"
+            >
+                افتح واتساب
+            </a>
+        </div>
+
+        <div class="contact-card reveal">
+            <div class="contact-icon">📞</div>
+            <h3>اتصل بنا</h3>
+            <p>للاستفسارات والطلبات.</p>
+            <br>
+            <a href="tel:+201272949858" class="btn btn-orange">
+                اتصل الآن
+            </a>
+        </div>
+
+        <div class="contact-card reveal">
+            <div class="contact-icon">📍</div>
+            <h3>مكاننا</h3>
+            <p>نوصل لك المنتجات الطازجة بكل سهولة.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <div class="footer-logo">ONE</div>
+            <p>
+                فواكه وخضروات وعصائر طبيعية طازجة كل يوم.
+                اختار منتجاتك واطلب بسهولة عبر واتساب.
+            </p>
+        </div>
+
+        <div>
+            <h3>روابط سريعة</h3>
+            <div class="footer-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#products">منتجاتنا</a>
+                <a href="#about">من نحن</a>
+                <a href="#contact">تواصل معنا</a>
+            </div>
+        </div>
+
+        <div>
+            <h3>الأقسام</h3>
+            <div class="footer-links">
+                <a href="#products">أطباق الفواكه</a>
+                <a href="#products">الفواكه</a>
+                <a href="#products">الخضروات</a>
+                <a href="#products">العصائر</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 ONE — طازج كل يوم 🍃
+    </div>
+
+</footer>
+
+<!-- WHATSAPP -->
+<a
+    href="https://wa.me/201272949858"
+    target="_blank"
+    class="whatsapp"
+    title="واتساب"
+>
+    💬
+</a>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- CART -->
+<aside class="cart-drawer" id="cartDrawer">
+
+    <div class="cart-head">
+        <h2>سلة الطلب 🛒</h2>
+
+        <button class="close-cart" id="closeCart">
+            ×
+        </button>
+    </div>
+
+    <div class="cart-body" id="cartBody"></div>
+
+    <div class="cart-footer">
+
+        <button class="btn btn-green" id="checkout">
+            إرسال الطلب على واتساب 💬
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- QUICK VIEW MODAL -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <button class="modal-close" id="modalClose">
+            ×
+        </button>
+
+        <div class="modal-grid">
+
+            <img id="modalImage" src="" alt="">
+
+            <div class="modal-info">
+
+                <small id="modalCategory"></small>
+
+                <h2 id="modalTitle"></h2>
+
+                <p id="modalDescription"></p>
+
+                <button class="btn btn-green" id="modalAdd">
+                    أضف للسلة 🛒
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* ================= LOADER ================= */
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hide");
+    }, 700);
+});
+
+/* ================= HEADER ================= */
+
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+
+    header.classList.toggle("scrolled", window.scrollY > 50);
+
+    const scrollTop = window.scrollY;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = height > 0 ? (scrollTop / height) * 100 : 0;
+
+    document.getElementById("progress").style.width = progress + "%";
+});
+
+/* ================= MOBILE MENU ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+    });
+});
+
+/* ================= DARK MODE ================= */
+
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        themeBtn.textContent = "☀️";
+        localStorage.setItem("one-theme","dark");
+    }else{
+        themeBtn.textContent = "🌙";
+        localStorage.setItem("one-theme","light");
+    }
+
+});
+
+if(localStorage.getItem("one-theme") === "dark"){
+    document.body.classList.add("dark");
+    themeBtn.textContent = "☀️";
+}
+
+/* ================= CART ================= */
+
+let cart = JSON.parse(localStorage.getItem("one-cart") || "[]");
+
+const cartBtn = document.getElementById("cartBtn");
+const cartDrawer = document.getElementById("cartDrawer");
+const closeCart = document.getElementById("closeCart");
+const overlay = document.getElementById("overlay");
+const cartBody = document.getElementById("cartBody");
+const cartCount = document.getElementById("cartCount");
+
+function saveCart(){
+    localStorage.setItem("one-cart", JSON.stringify(cart));
+}
+
+function updateCartCount(){
+
+    const count = cart.reduce((sum,item) => {
+        return sum + item.quantity;
+    },0);
+
+    cartCount.textContent = count;
+}
+
+function openCart(){
+
+    cartDrawer.classList.add("show");
+    overlay.classList.add("show");
+
+}
+
+function closeCartDrawer(){
+
+    cartDrawer.classList.remove("show");
+    overlay.classList.remove("show");
+
+}
+
+cartBtn.addEventListener("click", openCart);
+closeCart.addEventListener("click", closeCartDrawer);
+overlay.addEventListener("click", closeCartDrawer);
+
+function addToCart(product){
+
+    const existing = cart.find(item => item.name === product.name);
+
+    if(existing){
+
+        existing.quantity++;
+
+    }else{
+
+        cart.push({
+            name:product.name,
+            image:product.image,
+            quantity:1
+        });
+
+    }
+
+    saveCart();
+    updateCartCount();
+    renderCart();
+
+    showToast("تمت إضافة " + product.name + " للسلة 🛒");
+
+}
+
+function changeQty(index, change){
+
+    if(!cart[index]) return;
+
+    cart[index].quantity += change;
+
+    if(cart[index].quantity <= 0){
+        cart.splice(index,1);
+    }
+
+    saveCart();
+    updateCartCount();
+    renderCart();
+
+}
+
+function removeCart(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+    updateCartCount();
+    renderCart();
+
+    showToast("تم حذف المنتج من السلة");
+
+}
+
+function renderCart(){
+
+    if(cart.length === 0){
+
+        cartBody.innerHTML = `
+            <div class="empty-cart">
+                <div>🛒</div>
+                <p>السلة لسه فاضية</p>
+                <small>اختار المنتجات اللي بتحبها وأضفها هنا.</small>
+            </div>
+        `;
+
+        return;
+    }
+
+    cartBody.innerHTML = cart.map((item,index) => {
+
+        return `
+            <div class="cart-item">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                    onerror="this.style.display='none'"
+                >
+
+                <div class="cart-item-info">
+
+                    <strong>${item.name}</strong>
+
+                    <small>
+                        الكمية: ${item.quantity}
+                    </small>
+
+                    <div class="qty">
+
+                        <button onclick="changeQty(${index},-1)">
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button onclick="changeQty(${index},1)">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="remove-item"
+                    onclick="removeCart(${index})"
+                >
+                    ×
+                </button>
+
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+/* ================= WHATSAPP ORDER ================= */
+
+function sendOrderToWhatsApp(){
+
+    if(cart.length === 0){
+
+        showToast("السلة فاضية، أضف منتجات الأول 🛒");
+
+        return;
+
+    }
+
+    const totalItems = cart.reduce((sum,item) => {
+        return sum + item.quantity;
+    },0);
+
+    const productsText = cart.map((item,index) => {
+
+        return `${index + 1}. ${item.name} × ${item.quantity}`;
+
+    }).join("\n");
+
+    const message =
+`مرحباً ONE 👋
+
+أريد تأكيد طلبي:
+
+${productsText}
+
+إجمالي القطع: ${totalItems}
+
+من فضلكم تواصلوا معي لتأكيد الطلب ❤️`;
+
+    const phone = "201272949858";
+
+    const whatsappURL =
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL,"_blank");
+
+}
+
+document.getElementById("checkout")
+    .addEventListener("click",sendOrderToWhatsApp);
+
+/* ================= PRODUCT BUTTONS ================= */
+
+document.querySelectorAll(".product-card").forEach(card => {
+
+    const addButton = card.querySelector(".add-btn");
+    const viewButton = card.querySelector(".view-btn");
+    const favorite = card.querySelector(".favorite");
+
+    const product = {
+
+        name:card.dataset.name,
+
+        description:card.dataset.description,
+
+        image:card.dataset.image,
+
+        category:card.dataset.category
+
+    };
+
+    addButton.addEventListener("click",() => {
+
+        addToCart(product);
+
+    });
+
+    viewButton.addEventListener("click",() => {
+
+        openModal(product);
+
+    });
+
+    favorite.addEventListener("click",(e) => {
+
+        e.stopPropagation();
+
+        favorite.classList.toggle("active");
+
+        favorite.textContent =
+            favorite.classList.contains("active")
+            ? "♥"
+            : "♡";
+
+    });
+
+});
+
+/* ================= FILTER ================= */
+
+const filters = document.querySelectorAll(".filter");
+const products = document.querySelectorAll(".product-card");
+
+let currentFilter = "all";
+
+filters.forEach(filter => {
+
+    filter.addEventListener("click",() => {
+
+        filters.forEach(item => item.classList.remove("active"));
+
+        filter.classList.add("active");
+
+        currentFilter = filter.dataset.filter;
+
+        applyFilters();
+
+    });
+
+});
+
+/* ================= SEARCH ================= */
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input",applyFilters);
+
+function applyFilters(){
+
+    const search =
+        searchInput.value.trim().toLowerCase();
+
+    products.forEach(card => {
+
+        const category = card.dataset.category;
+        const name = card.dataset.name.toLowerCase();
+        const description = card.dataset.description.toLowerCase();
+
+        const categoryMatch =
+            currentFilter === "all" ||
+            category === currentFilter;
+
+        const searchMatch =
+            name.includes(search) ||
+            description.includes(search);
+
+        if(categoryMatch && searchMatch){
+
+            card.style.display = "";
+
+            setTimeout(() => {
+                card.classList.add("visible");
+            },20);
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+/* ================= MODAL ================= */
+
+const modal = document.getElementById("modal");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const modalCategory = document.getElementById("modalCategory");
+const modalClose = document.getElementById("modalClose");
+const modalAdd = document.getElementById("modalAdd");
+
+let currentModalProduct = null;
+
+const categoryNames = {
+    platter:"🍇 أطباق فواكه",
+    fruit:"🍓 فواكه",
+    vegetable:"🥬 خضروات",
+    juice:"🍹 عصائر"
+};
+
+function openModal(product){
+
+    currentModalProduct = product;
+
+    modalImage.src = product.image;
+    modalImage.alt = product.name;
+
+    modalTitle.textContent = product.name;
+
+    modalDescription.textContent =
+        product.description;
+
+    modalCategory.textContent =
+        categoryNames[product.category] || "";
+
+    modal.classList.add("show");
+
+}
+
+function closeModal(){
+
+    modal.classList.remove("show");
+
+}
+
+modalClose.addEventListener("click",closeModal);
+
+modal.addEventListener("click",(e) => {
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+});
+
+modalAdd.addEventListener("click",() => {
+
+    if(currentModalProduct){
+
+        addToCart(currentModalProduct);
+
+        closeModal();
+
+    }
+
+});
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast = document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+
+}
+
+/* ================= SCROLL REVEAL ================= */
+
+const revealObserver =
+    new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("visible");
+
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },{
+        threshold:.12
+    });
+
+document.querySelectorAll(".reveal")
+    .forEach(el => revealObserver.observe(el));
+
+/* ================= COUNTERS ================= */
+
+const counters =
+    document.querySelectorAll("[data-count]");
+
+const counterObserver =
+    new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if(!entry.isIntersecting) return;
+
+            const element = entry.target;
+
+            const target =
+                Number(element.dataset.count);
+
+            let current = 0;
+
+            const duration = 1300;
+
+            const start = performance.now();
+
+            function animate(time){
+
+                const progress =
+                    Math.min((time - start) / duration,1);
+
+                current =
+                    Math.floor(progress * target);
+
+                element.textContent = current;
+
+                if(progress < 1){
+
+                    requestAnimationFrame(animate);
+
+                }else{
+
+                    element.textContent = target;
+
+                }
+
+            }
+
+            requestAnimationFrame(animate);
+
+            counterObserver.unobserve(element);
+
+        });
+
+    },{
+        threshold:.5
+    });
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+/* ================= INIT ================= */
+
+updateCartCount();
+renderCart();
+
+</script>
+
+</body>
+</html>
